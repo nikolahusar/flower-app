@@ -85,7 +85,7 @@ export default function DisplayMap({ position, setPosition }) {
 
   return (
     <div style={{ display: "flex", height: "100%", width: "100vw" }}>
-      <Wrapper apiKey={"AIzaSyC_EO1M0WuivXRGhRjgqZEsS9djAvmnCdw"}>
+      <Wrapper apiKey={"AIzaSyDKgAqzYBRqqU7u9I3eqqHG9bZoKbbsZ-A"}>
         <Map
           position={position}
           center={position}
