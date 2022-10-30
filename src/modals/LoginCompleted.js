@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 
-const LoginCompleted = ({ setLoginCompleted, setProfile }) => {
+const LoginCompleted = () => {
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
@@ -9,11 +10,11 @@ const LoginCompleted = ({ setLoginCompleted, setProfile }) => {
       setLoading(false);
     }, 500);
   }, []);
-
+  const navigate = useNavigate();
   const profileModal = () => {
-    setProfile(true);
-    setLoginCompleted(false);
+    navigate("/user");
   };
+
   return (
     <div
       className="absolute text-white z-20 min-h-screen max-w-screen flex pt-[400px] items-center  flex-col top-0 bottom-0 left-0 right-0 "
@@ -36,12 +37,12 @@ const LoginCompleted = ({ setLoginCompleted, setProfile }) => {
                   background:
                     "linear-gradient(270deg, #ECBCB3 0%, #EAA79E 100%)",
                 }}
-                onClick={() => window.location.reload()}
+                onClick={() => navigate(0)}
               >
                 OK
               </button>
               <button
-                className="flex-1  py-2 mt-4 text-sm text-white shadow-[0px 15px 20px rgba(234, 168, 159, 0.2)] bg-green-400"
+                className="flex-1  py-2 mt-4 text-sm   border-primary border text-primary"
                 onClick={profileModal}
               >
                 Profile

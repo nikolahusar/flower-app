@@ -1,21 +1,25 @@
-import React, { useContext } from "react";
-
+import React from "react";
+import { logOut } from "../redux/UserSlice";
 import { AiOutlineClose } from "react-icons/ai";
-import { UserContext } from "../context/userContext";
+import { useDispatch, useSelector } from "react-redux";
+import { favListRemove } from "../redux/FavoriteSlice";
+import { useNavigate } from "react-router-dom";
 const Profile = ({ setProfile }) => {
-  const { currentUser } = useContext(UserContext);
-  const name =
-    currentUser?.user?.first_name + " " + currentUser?.user?.last_name;
+  const dispatch = useDispatch();
+  const userInfo = useSelector((state) => state.user.userInfo);
+  const name = userInfo?.first_name + " " + userInfo?.last_name;
+  const navigate = useNavigate();
 
   const logout = () => {
-    localStorage.removeItem("authToken");
-    window.location.reload();
+    dispatch(logOut());
+    dispatch(favListRemove());
+    setProfile(false);
+    navigate("/");
   };
-
   return (
     <>
       <div
-        className="absolute text-white z-10 min-h-screen max-w-screen flex pt-[150px] items-center p-6 flex-col top-0 bottom-0 left-0 right-0 "
+        className="absolute text-white z-20 min-h-screen max-w-screen flex pt-[150px] items-center p-6 flex-col top-0 bottom-0 left-0 right-0 "
         style={{
           background: "linear-gradient(rgba(0,0,0,0.8), rgba(0,0,0,0.8))",
         }}
@@ -27,22 +31,18 @@ const Profile = ({ setProfile }) => {
               alt="profilePicture"
               className="w-[80px] h-[80px] rounded-full object-cover mr-[30px]"
             />
-            <div>
+            <div className="flex flex-col">
               <h2 className="text-2xl mb-1.5">{name}</h2>
               <span className="text-xs text-[#949EA0]">47 Sightings</span>
             </div>
           </div>
           <div className="mt-10 mb-8">
             <p className="text-[10px] text-[#949EA0] mb-4">First Name</p>
-            <h2 className="text-[#334144] text-lg">
-              {currentUser?.user?.first_name}
-            </h2>
+            <h2 className="text-[#334144] text-lg">{userInfo?.first_name}</h2>
           </div>
           <div className="mb-8">
             <p className="text-[10px] text-[#949EA0] mb-4">Last Name</p>
-            <h2 className="text-[#334144] text-lg">
-              {currentUser?.user?.last_name}
-            </h2>
+            <h2 className="text-[#334144] text-lg">{userInfo?.last_name}</h2>
           </div>
           <div className="mb-8">
             <p className="text-[10px] text-[#949EA0] mb-4">Date of Birth</p>

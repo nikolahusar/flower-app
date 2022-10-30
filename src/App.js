@@ -1,19 +1,29 @@
 import { useState } from "react";
-import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { useSelector } from "react-redux";
+import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
 import Navbar from "./components/Navbar";
 import Login from "./modals/Login";
-import LoginCompleted from "./modals/LoginCompleted";
 import Profile from "./modals/Profile";
-import RegisterCompleted from "./modals/RegisterCompleted";
 import SignUp from "./modals/SignUp";
+import Favorite from "./pages/Favorite";
+import FlowerDetails from "./pages/FlowerDetails";
+import FlowerList from "./pages/FlowerList";
 import Home from "./pages/Home";
+import NewSighting from "./pages/NewSighting";
+import SightingDetails from "./pages/SightingDetails";
+import Sightings from "./pages/Sightings";
+import User from "./pages/User";
 
 function App() {
   const [register, setRegister] = useState(false);
   const [login, setLogin] = useState(false);
-  const [registerCompleted, setRegisterCompleted] = useState(false);
-  const [loginCompleted, setLoginCompleted] = useState(false);
   const [profile, setProfile] = useState(false);
+
+  const loggedIn = useSelector((state) => state.user.userLoggedIn);
+
+  const RequireAut = ({ children }) => {
+    return loggedIn ? children : <Navigate to="/" />;
+  };
 
   return (
     <>
@@ -24,30 +34,41 @@ function App() {
             setLogin={setLogin}
             setProfile={setProfile}
           />
-          {register && (
-            <SignUp
-              setRegister={setRegister}
-              setRegisterCompleted={setRegisterCompleted}
-            />
-          )}
-          {registerCompleted && (
-            <RegisterCompleted
-              setLogin={setLogin}
-              setRegisterCompleted={setRegisterCompleted}
-            />
-          )}
-          {login && (
-            <Login setLogin={setLogin} setLoginCompleted={setLoginCompleted} />
-          )}
-          {loginCompleted && (
-            <LoginCompleted
-              setLoginCompleted={setLoginCompleted}
-              setProfile={setProfile}
-            />
-          )}
+          {register && <SignUp setRegister={setRegister} setLogin={setLogin} />}
+
+          {login && <Login setLogin={setLogin} />}
+
           {profile && <Profile setProfile={setProfile} />}
           <Routes>
             <Route index element={<Home />} />
+            <Route
+              path="/favorite"
+              element={
+                <RequireAut>
+                  <Favorite />
+                </RequireAut>
+              }
+            />
+            <Route path="/flower-list" element={<FlowerList />} />
+            <Route path="/flowers/:id" element={<FlowerDetails />} />
+            <Route path="/sightings" element={<Sightings />} />
+            <Route path="/sighting/:id" element={<SightingDetails />} />
+            <Route
+              path="/new/:id"
+              element={
+                <RequireAut>
+                  <NewSighting />
+                </RequireAut>
+              }
+            />
+            <Route
+              path="/user"
+              element={
+                <RequireAut>
+                  <User />
+                </RequireAut>
+              }
+            />
           </Routes>
         </div>
       </BrowserRouter>
