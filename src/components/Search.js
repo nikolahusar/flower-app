@@ -31,18 +31,18 @@ function Search() {
   };
 
   return (
-    <div className="relative mt-10">
-      <div className="relative w-[600px] h-[70px] ">
+    <div className="relative mt-10 sm:mt-[56px] ">
+      <div className="relative max-w-screen w-[600px] sm:w-[307px] h-[70px] sm:h-[56px]">
         {!query ? (
-          <button className="cursor-pointer absolute h-6 w-6 right-6 top-6 ">
-            <BsSearch className="w-full h-full text-primary" />
+          <button className="cursor-pointer absolute h-6 w-6 right-6 top-6 sm:w-3 sm:h-3">
+            <BsSearch className="w-full h-full text-primary " />
           </button>
         ) : (
           <button
             onClick={() => remove()}
             className="cursor-pointer absolute h-6 w-6 right-6 top-6 "
           >
-            <AiOutlineClose className="w-full h-full text-primary" />
+            <AiOutlineClose className="w-full h-full text-primary " />
           </button>
         )}
 
@@ -51,10 +51,10 @@ function Search() {
           value={query}
           type="text"
           placeholder="Looking for something specific?"
-          className="outline-0  w-full h-full px-6 rounded-md"
+          className="outline-0  w-full h-full px-6 rounded-md sm:placeholder:text-sm"
         />
       </div>
-      <div className="mt-[-6px] absolute z-10 w-full">
+      <div className="mt-[-6px]  absolute z-10 w-full">
         {query?.length > 0 &&
           data?.map((d) => (
             <Link to={`/flowers/${d.id}`}>
@@ -67,9 +67,9 @@ function Search() {
                   src={d.profile_picture}
                   alt=""
                 />
-                <div className="flex flex-col">
-                  <h1 className="font-medium">{d.name}</h1>
-                  <h1 className="font-sm text-gray-400">{d.latin_name}</h1>
+                <div className="flex flex-col text-left text-xs">
+                  <h1 className="font-medium ">{d.name}</h1>
+                  <h1 className="font-sm text-gray-400 ">{d.latin_name}</h1>
                 </div>
               </div>
             </Link>

@@ -14,7 +14,7 @@ const Home = () => {
     <>
       <Banner />
       {flowers.pending && <div>Loading...</div>}
-      <section className="flex flex-wrap max-w-[1220px]  mx-auto gap-4 py-[90px]  px-4 ">
+      <section className="flex flex-wrap max-w-[1220px]  mx-auto gap-4 py-[40px]  px-4 justify-center  ">
         {flowers?.flowers.map((flower) => (
           <FlowerCard
             key={flower.id}

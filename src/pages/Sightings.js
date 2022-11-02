@@ -21,7 +21,7 @@ const Sightings = () => {
           </p>
         </div>
 
-        <section className="flex flex-wrap  gap-4 pb-20  px-4">
+        <section className="flex flex-wrap  gap-4 pb-20  px-4 justify-center">
           {sightings?.map((sightings) => (
             <SightingCard
               key={sightings.id}

@@ -24,7 +24,7 @@ const SightingCard = (props) => {
   };
 
   return (
-    <div className="w-[280px] max-h-[500px] rounded-[3px] shadow-lg">
+    <div className="w-[280px] max-h-[500px] rounded-[3px] shadow-lg sm:w-[387px]">
       <Link to={`/sighting/${id}`}>
         <div
           className="w-full h-[280px] bg-cover bg-center"
@@ -35,7 +35,7 @@ const SightingCard = (props) => {
       </Link>
       <div className="flex flex-col px-5 ">
         <div className="flex items-center  ">
-          <div className="flex-1 flex items-center gap-[15px] my-5">
+          <div className="flex-1 flex items-center gap-[15px] sm:gap-[40px] my-5">
             <img
               src="https://images.pexels.com/photos/1681010/pexels-photo-1681010.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
               alt="profilePicture"

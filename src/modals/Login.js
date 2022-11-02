@@ -1,5 +1,6 @@
 import React, { useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 import { loginUser } from "../redux/apiCalls";
 import { err } from "../redux/UserSlice";
 import LoginCompleted from "./LoginCompleted";
@@ -7,9 +8,9 @@ const Login = ({ setLogin }) => {
   const email = useRef();
   const password = useRef();
   const dispatch = useDispatch();
-  const user = useSelector((state) => state.user);
-  const loggedIn = user.userLoggedIn;
+  const loggedIn = useSelector((state) => state.user.userLoggedIn);
   const error = useSelector((state) => state.user.error);
+  const navigate = useNavigate();
   const handleSubmit = async (e) => {
     e.preventDefault();
     loginUser(
@@ -18,6 +19,7 @@ const Login = ({ setLogin }) => {
     );
 
     loggedIn && setLogin(false);
+    navigate(-1);
   };
   console.log(error);
 

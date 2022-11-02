@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { Link, useParams } from "react-router-dom";
 import hero from "../assets/fd-hero.png";
 import { markAsFavorite } from "../redux/apiCalls";
-
+import bg from "../assets/flowerBg.png";
 const FlowerDetails = () => {
   const id = useParams();
   const favorite = useSelector((state) => state.favoriteList);
@@ -42,7 +42,7 @@ const FlowerDetails = () => {
   return (
     <>
       <div
-        className="max-w-screen h-[350px] bg-cover bg-center "
+        className="max-w-screen h-[350px] bg-cover bg-center sm:hidden"
         style={{
           backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.0001) 0%, rgba(0, 0, 0, 0.4) 100%), url(${hero})`,
         }}
@@ -89,15 +89,53 @@ const FlowerDetails = () => {
           </div>
         </div>
       </div>
+      <div
+        className="max-w-screen h-[350px] bg-cover bg-center sm:block hidden relative"
+        style={{
+          backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.0001) 0%, rgba(0, 0, 0, 0.4) 100%), url(${bg})`,
+        }}
+      >
+        <div className="flex flex-col pt-[190px] ml-[40px]">
+          <div className="flex  gap-[10px] mb-1.5">
+            <div
+              className={`w-[30px] h-[30px] cursor-pointer   rounded-full  flex items-center justify-center  ${
+                findId(data.id)
+                  ? "bg-primary text-[white]"
+                  : "bg-white text-[gray]"
+              }`}
+              onClick={add}
+            >
+              <BsFillStarFill className="w-[13px] h-[12px] " />
+            </div>
+            <span className="leading-3 text-[white] text-xs rounded-[20px] bg-[rgba(0,0,0,0.2)] px-[15px] py-2.5 ">
+              {data.sightings} sightings
+            </span>
+          </div>
+          <h2 className="text-[35px] text-[white] sm:font-light ">
+            {data.name}
+          </h2>
+          <p className="text-[14px] opacity-[70%] text-[white]">
+            {data.latin_name}
+          </p>
+        </div>
+        {loggedIn ? (
+          <Link
+            to={`/new/${data.id}`}
+            className="absolute left-10 bottom-[-25px]  bg-primary text-white py-[18px] px-[35px] text-[14px] font-medium"
+          >
+            + Add New Sighting
+          </Link>
+        ) : null}
+      </div>
       <div className="max-w-[1220px]  mx-auto">
-        <div className="flex">
+        <div className="flex sm:flex-col sm:px-[40px]">
           <ul className="w-full pt-[100px] flex flex-col gap-1 text-secondary text-sm font-bold">
             <li>Kingdom: Plantae</li>
             <li>Order: Asterales</li>
             <li>Family: Campanulaceae</li>
             <li>Species: {data.latin_name}</li>
           </ul>
-          <div className="max-w-[750px] pr-[120px] pt-[50px] text-secondary text-sm">
+          <div className="max-w-[750px] pr-[120px] pt-[50px] text-secondary text-sm sm:pr-0 ">
             Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam
             illum in quaerat laborum non alias iusto voluptatum, fuga error
             officia deleniti. Modi aperiam dicta et sapiente ut, fugiat

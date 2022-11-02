@@ -62,7 +62,9 @@ const SightingDetails = () => {
     lat: 0,
     lng: 0,
   });
-
+  function truncate(string, n) {
+    return string?.length > n ? string.substr(0, n - 1) + "..." : string;
+  }
   return (
     <>
       <div className="w-full">
@@ -73,8 +75,8 @@ const SightingDetails = () => {
               setPosition={setPosition}
             />
           </div>
-          <div className=" z-10 w-[1220px] p-[30px] h-[350px] z-1 shadow-lg mx-auto  mt-[-50px] bg-[white] flex items-center gap-[50px] scroll-smooth">
-            <div className="w-[290px] h-[290px]">
+          <div className=" z-10 w-[1220px] sm:w-[90%] p-[30px] sm:p-4 h-[350px] sm:h-screen z-1 shadow-lg mx-auto  mt-[-50px] bg-[white] flex items-center gap-[50px] sm:gap-2 scroll-smooth sm:flex-col">
+            <div className="w-[290px] h-[290px] sm:w-full">
               <img
                 src={data.picture}
                 alt={data.name}
@@ -86,19 +88,19 @@ const SightingDetails = () => {
                 <img
                   src="https://images.pexels.com/photos/1681010/pexels-photo-1681010.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
                   alt="profilePicture"
-                  className="w-10 h-10 rounded-full object-cover "
+                  className="w-10 h-10 rounded-full object-cover sm:w-[50px] sm:h-[50px]"
                 />
                 <div className="author flex flex-col">
-                  <h1 className="text-[15px] font-normal text-[#334144]">
+                  <h1 className="text-[15px] font-normal text-[#334144] sm:text-[25px]">
                     {data.name}
                   </h1>
-                  <p className="font-normal italic text-xs text-secondary">
+                  <p className="font-normal italic text-xs text-secondary sm:text-sm">
                     By {data.user?.full_name}
                   </p>
                 </div>
               </div>
-              <p className="font-medium text-xs text-secondary  h-[74px]">
-                {data.description}
+              <p className="font-medium text-xs text-secondary  h-[74px] sm:h-[200px]">
+                {truncate(data.description, 400)}
               </p>
               <div className=" flex items-center gap-5 py-5 border-t  border-[#E8E9ED]">
                 <div className="flex items-center gap-2.5">
@@ -119,19 +121,19 @@ const SightingDetails = () => {
               </div>
             </div>
           </div>
-          <div className="mt-[50px] w-[780px] border-t border-[#E8E9ED] mx-auto pb-[80px]">
+          <div className="mt-[50px] w-[780px] border-t border-[#E8E9ED] mx-auto pb-[80px] sm:w-full sm:border-none sm:px-4 sm:mb-5">
             <div className="flex mt-[63px] items-center justify-between">
-              <p className="text-[25px] text-[#334144] pl-[50px]">
+              <p className="text-[25px] text-[#334144] pl-[50px] sm:pl-4 sm:font-light">
                 {comments.length} Comments
               </p>
               <button
                 onClick={focusInput}
-                className="w-[150px] h-[50px] bg-white shadow-lg text-[#DF9186] text-[14px] border-none outline-none font-medium"
+                className="w-[150px] sm:mt-[-160px] h-[50px] bg-white shadow-lg text-[#DF9186] text-[14px] border-none outline-none font-medium"
               >
                 Add Comment
               </button>
             </div>
-            <section className="mt-20">
+            <section className="mt-20 sm:px-4 sm:mt-10">
               {comments?.map((comment) => (
                 <CommentSection
                   key={comment.id}

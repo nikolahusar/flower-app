@@ -19,7 +19,7 @@ const Profile = ({ setProfile }) => {
   return (
     <>
       <div
-        className="absolute text-white z-20 min-h-screen max-w-screen flex pt-[150px] items-center p-6 flex-col top-0 bottom-0 left-0 right-0 "
+        className="absolute text-white z-20 min-h-screen max-w-screen flex pt-[100px] items-center p-6 flex-col top-0 bottom-0 left-0 right-0 "
         style={{
           background: "linear-gradient(rgba(0,0,0,0.8), rgba(0,0,0,0.8))",
         }}

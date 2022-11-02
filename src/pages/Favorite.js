@@ -4,6 +4,7 @@ import FlowerCard from "../components/FlowerCard";
 import { favoriteList } from "../redux/apiCalls";
 const Favorite = () => {
   const favorite = useSelector((state) => state.favoriteList);
+
   const dispatch = useDispatch();
   const token = useSelector((state) => state.user.token);
 
@@ -13,8 +14,8 @@ const Favorite = () => {
 
   return (
     <div>
-      <section className="flex flex-wrap max-w-[1220px]  mx-auto gap-4 mt-[90px]  px-4 ">
-        {favorite?.favoriteList?.map((f) => (
+      <section className="flex flex-wrap max-w-[1220px]  mx-auto gap-4 mt-[90px]  px-4 justify-center ">
+        {favorite?.favoriteList?.fav_flowers.map((f) => (
           <>
             <FlowerCard
               key={f.id}

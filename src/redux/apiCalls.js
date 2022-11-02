@@ -93,7 +93,7 @@ export const favoriteList = (token) => async (dispatch) => {
         },
       }
     );
-    dispatch(favoriteListSuccess(res.data.fav_flowers));
+    dispatch(favoriteListSuccess(res.data));
 
     dispatch(
       favoriteId(res?.data?.fav_flowers?.map((flower) => flower.flower.id))
@@ -117,6 +117,18 @@ export const markAsFavorite = (token, id) => async (dispatch) => {
 
     dispatch(favoriteList(token));
   } catch (error) {}
+};
+
+export const deleteFromFave = (token, id, id2) => async (dispatch) => {
+  await axios.delete(
+    `https://flowrspot-api.herokuapp.com/api/v1/flowers/${id}/favorites/${id2}`,
+    {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    }
+  );
+  dispatch(favoriteList(token));
 };
 
 export const getComments = (id) => async (dispatch) => {

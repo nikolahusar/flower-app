@@ -16,6 +16,12 @@ module.exports = {
       backgroundImage: {
         hero: "url('/assets/pl-hero.png')",
       },
+      screens: {
+        xl: { max: "1279px" },
+        lg: { max: "1024px" },
+        md: { max: "768px" },
+        sm: { max: "640px" },
+      },
     },
   },
   plugins: [],
